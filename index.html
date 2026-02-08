@@ -35,9 +35,54 @@
             min-height: 100vh;
         }
 
+        .logo-bar {
+            background: #e2e5e8;
+            padding: 16px 0;
+            border-bottom: 1px solid #d0d4d8;
+        }
+
+        .logo-bar-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .logo-star {
+            height: 60px;
+            width: 60px;
+            flex-shrink: 0;
+        }
+
+        .logo-brand-text {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .logo-carta {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 30px;
+            font-weight: 500;
+            color: #1a5568;
+            letter-spacing: 6px;
+            line-height: 1.1;
+        }
+
+        .logo-healthcare {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 19px;
+            font-weight: 500;
+            color: #1a5568;
+            letter-spacing: 5.5px;
+            line-height: 1.1;
+        }
+
         .header {
             background: linear-gradient(135deg, var(--carta-teal-dark) 0%, var(--carta-blue) 100%);
-            padding: 30px 0;
+            padding: 24px 0;
             box-shadow: 0 4px 20px rgba(26, 77, 77, 0.15);
             position: sticky;
             top: 0;
@@ -48,26 +93,6 @@
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 20px;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: 24px;
-            font-family: 'Space Grotesk', sans-serif;
-        }
-
-        .logo img {
-            height: 40px;
-            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
-        }
-
-        .logo-text {
-            font-size: 24px;
-            font-weight: 600;
-            color: var(--carta-white);
-            letter-spacing: -0.3px;
         }
 
         .search-box {
@@ -352,13 +377,27 @@
         }
 
         @media (max-width: 768px) {
-            .header {
-                padding: 20px 0;
+            .logo-bar {
+                padding: 12px 0;
             }
 
-            .logo {
+            .logo-star {
+                height: 44px;
+                width: 44px;
+            }
+
+            .logo-carta {
                 font-size: 22px;
-                margin-bottom: 18px;
+                letter-spacing: 4px;
+            }
+
+            .logo-healthcare {
+                font-size: 14px;
+                letter-spacing: 4px;
+            }
+
+            .header {
+                padding: 16px 0;
             }
 
             .filters {
@@ -382,25 +421,29 @@
     </style>
 </head>
 <body>
+    <div class="logo-bar">
+        <div class="logo-bar-inner">
+            <svg class="logo-star" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <g fill="#1a5568">
+                    <polygon points="50,2 55,24 50,43 45,24"/>
+                    <polygon points="50,98 45,76 50,57 55,76"/>
+                    <polygon points="98,50 76,55 57,50 76,45"/>
+                    <polygon points="2,50 24,45 43,50 24,55"/>
+                    <polygon points="73,27 66,38 55,45 62,34"/>
+                    <polygon points="73,73 66,62 55,55 62,66"/>
+                    <polygon points="27,73 34,62 45,55 38,66"/>
+                    <polygon points="27,27 38,34 45,45 34,38"/>
+                </g>
+            </svg>
+            <div class="logo-brand-text">
+                <div class="logo-carta">CARTA</div>
+                <div class="logo-healthcare">HEALTHCARE</div>
+            </div>
+        </div>
+    </div>
+
     <div class="header">
         <div class="container">
-            <div class="logo">
-            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAE4gAAAZeCAYAAACsGcuQAAAACXBIWXMAADGlAAAxpQFbef8UAAAg
-AElEQVR4nOzczXHsuhWFUbQSaL0IhAxERyBm5FQcmh2ByxH4OgJ64KuySk9S/5HcBLBWAudr9IiT
-fVqWpQAAAOzsb6WUv+547x+llGnHewAAAAAAAAAAAAAAAAAAAAB3eUoHAAAAQ9p7rO1153sAAAAA
-AAAAAAAAAAAAAAAAdzEQBwAAJOw9EJe6CQAAAAAAAAAAAAAAAAAAAHATA3EAAMDeainlHLoLAAAA
-AAAAAAAAAAAAAAAAcGgG4gAAgL3V0N0pdBcAAAAAAAAAAAAAAAAAAADgagbiAACAvc2huwbiAAAA
-gMMzEAcAAOwtNdRWQ3cBAAAAAAAAAAAAAAAAAAAArmYgDgAA2FsN3X0N3QUAAAAAAAAAAAAAAAAAAABOywZiAAAA
-AADAnmr4/hy+DwAAAAAAAAAAAAAAAAAAAPA1Q3EAAMCe5vB9A3EAAAAAAAAAAAAAAAAAAAA7M9AB
-AADsqYbvz+H7AAAAAAAAAAAAAAAAAAAAAD8yEAcAAOxpDt+v4fsAAAAAAAAAAAAAAAAAAAAA
-APAjA3EAAMCe5vD9Gr4PAAAAAAAAAAAAAAAAAAAA8KPTsizpBgAAYBy/Synncfp3f
-B8AAAAAAAAAAAAAAAAAAAADgW0/pAAAAYBjPJT8OV0opczoAAAAAAAAAAAAAAAAAAAAA
-4DsG4gAAgL1M6YDfajoAAAAAAAAAAAAAAAAAAAAA4DsG4gAAgL3M6YDfajoAAAAAAAAA
-AAAAAAAAAAAAA4DsG4gAAgL3UdMBvczoAAAAAAAAAAAAAAAAAAAAA4DsG4gAAgL1M6YDfjt
-IBAAAAAAAAAAAAAAAAAAAA8CenZVnSDQAAwBiO9PHxRynlVzoCAAAAAAAAAAAAAAAA4DOndA
-AAADCEKR3wydF6AAAAAAAAAAAAAAAAAAAAAACllPKf9/gQJqDaGGLQAAAABJRU5ErkJggg==" alt="Carta Healthcare">
-                <span class="logo-text">Carta Healthcare</span>
-        </div>
             <div class="search-box">
                 <div class="search-input-wrapper">
                     <span class="search-icon">🔍</span>
