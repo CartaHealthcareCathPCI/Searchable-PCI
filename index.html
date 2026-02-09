@@ -221,6 +221,67 @@
             color: #2d3436;
         }
 
+        .type-ncdr-resources {
+            background: #6B4C9A;
+            color: #ffffff;
+        }
+
+        .crosswalk-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 8px;
+            font-size: 14px;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .crosswalk-table thead th {
+            padding: 12px 16px;
+            text-align: left;
+            font-weight: 700;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            background: var(--carta-teal-dark);
+            color: #ffffff;
+        }
+
+        .crosswalk-table tbody td {
+            padding: 10px 16px;
+            border-bottom: 1px solid #e8eef2;
+        }
+
+        .crosswalk-table tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        .crosswalk-table tbody td:first-child {
+            font-weight: 500;
+            color: var(--carta-gray-dark);
+        }
+
+        .crosswalk-table tbody td:last-child {
+            font-weight: 700;
+            text-align: center;
+            width: 120px;
+        }
+
+        .crosswalk-group-lt50 { background-color: #e8f5e9; }
+        .crosswalk-group-lt50 td:last-child { color: #2e7d32; }
+
+        .crosswalk-group-gte50 { background-color: #fff8e1; }
+        .crosswalk-group-gte50 td:last-child { color: #f9a825; }
+
+        .crosswalk-group-gte70 { background-color: #fff3e0; }
+        .crosswalk-group-gte70 td:last-child { color: #e65100; }
+
+        .crosswalk-group-gte90 { background-color: #fce4ec; }
+        .crosswalk-group-gte90 td:last-child { color: #c62828; }
+
+        .crosswalk-group-100 { background-color: #efebe9; }
+        .crosswalk-group-100 td:last-child { color: #4e342e; }
+
         .element-name {
             font-size: 18px;
             font-weight: 600;
@@ -381,6 +442,7 @@
             <button class="filter-btn" data-filter="Supporting Definition">Supporting Definitions</button>
             <button class="filter-btn" data-filter="Additional Coding Directives">Additional Coding Directives</button>
             <button class="filter-btn" data-filter="Pending Definition Updates">Pending Updates</button>
+            <button class="filter-btn" data-filter="NCDR Resources">NCDR Resources</button>
         </div>
 
         <div id="resultsInfo" class="results-info" style="display: none;"></div>
@@ -4792,10 +4854,10 @@
                         "seqNum": "8007",
                         "elementName": "TIMI Flow (Pre-Intervention)",
                         "question": "Can we use the Qualitative/Quantitative Crosswalk to code TIMI Flow in Seq#8007 TIMI Flow (Pre-Intervention)?",
-                        "answer": "No.        The Qualitative Quantitative Crosswalk is singularly designed to assist with coding the stenosis observed in the coronary anatomy when descriptive terms are used to describe it in the medical record.  The Data Dictionary does not provide any assistance with converting descriptive terms to a percent stenosis and this document is designed to fill that gap.  The Qualitative Quantitative Crosswalk is not designed for any other purpose and most specifically should not be used to extrapolate the TIMI flow.  The Data Dictionary provides a definition for each TIMI flow selection.  Thus, when descriptive terms are used to describe the TIMI flow in the medical record, the dictionary definition can be used to accurately select the applicable TIMI flow.\nCROSSWALK:\nNo stenosis/disease noted\t<50%\nNormal\t<50%\nNo significant disease\t<50%\nPatent vessel\t<50%\nLuminal irregularities\t<50%\nMinimal disease\t<50%\nDiffuse disease\t<50%\nMild disease\t<50%\nBorderline obstructive/obstruction\t≥50%\nBorderline disease\t≥50%\nModerate disease\t≥50%\nIntermediate disease\t≥50%\nSignificant\t≥70%\nObstructive disease\t≥70%\nFlow-limiting\t≥70%\nCritical\t≥90%\nSubtotaled\t≥90%\nSevere\t≥90%\nTight\t≥90%\nOcclusive\t≥90%\nTotal occlusion\t100%\nChronic Total Occlusion (CTO)\t100%\nOccluded\t100%",
+                        "answer": "No. The Qualitative Quantitative Crosswalk is singularly designed to assist with coding the stenosis observed in the coronary anatomy when descriptive terms are used to describe it in the medical record.  The Data Dictionary does not provide any assistance with converting descriptive terms to a percent stenosis and this document is designed to fill that gap.  The Qualitative Quantitative Crosswalk is not designed for any other purpose and most specifically should not be used to extrapolate the TIMI flow.  The Data Dictionary provides a definition for each TIMI flow selection.  Thus, when descriptive terms are used to describe the TIMI flow in the medical record, the dictionary definition can be used to accurately select the applicable TIMI flow.",
                         "postedDate": "2018-05-07",
                         "type": "Additional Coding Directives",
-                        "searchText": "8007 timi flow (pre-intervention) can we use the qualitative/quantitative crosswalk to code timi flow in seq#8007 timi flow (pre-intervention)? no.        the qualitative quantitative crosswalk is singularly designed to assist with coding the stenosis observed in the coronary anatomy when descriptive terms are used to describe it in the medical record.  the data dictionary does not provide any assistance with converting descriptive terms to a percent stenosis and this document is designed to fill that gap.  the qualitative quantitative crosswalk is not designed for any other purpose and most specifically should not be used to extrapolate the timi flow.  the data dictionary provides a definition for each timi flow selection.  thus, when descriptive terms are used to describe the timi flow in the medical record, the dictionary definition can be used to accurately select the applicable timi flow.\ncrosswalk:\nno stenosis/disease noted\t<50%\nnormal\t<50%\nno significant disease\t<50%\npatent vessel\t<50%\nluminal irregularities\t<50%\nminimal disease\t<50%\ndiffuse disease\t<50%\nmild disease\t<50%\nborderline obstructive/obstruction\t≥50%\nborderline disease\t≥50%\nmoderate disease\t≥50%\nintermediate disease\t≥50%\nsignificant\t≥70%\nobstructive disease\t≥70%\nflow-limiting\t≥70%\ncritical\t≥90%\nsubtotaled\t≥90%\nsevere\t≥90%\ntight\t≥90%\nocclusive\t≥90%\ntotal occlusion\t100%\nchronic total occlusion (cto)\t100%\noccluded\t100%"
+                        "searchText": "8007 timi flow (pre-intervention) can we use the qualitative/quantitative crosswalk to code timi flow in seq#8007 timi flow (pre-intervention)? no. the qualitative quantitative crosswalk is singularly designed to assist with coding the stenosis observed in the coronary anatomy when descriptive terms are used to describe it in the medical record.  the data dictionary does not provide any assistance with converting descriptive terms to a percent stenosis and this document is designed to fill that gap.  the qualitative quantitative crosswalk is not designed for any other purpose and most specifically should not be used to extrapolate the timi flow.  the data dictionary provides a definition for each timi flow selection.  thus, when descriptive terms are used to describe the timi flow in the medical record, the dictionary definition can be used to accurately select the applicable timi flow."
                 },
                 {
                         "seqNum": "8009",
@@ -5339,6 +5401,39 @@
                         "type": "Pending Definition Updates",
                         "searchText": "9003 intra/post procedure event date/time indicate the date and time the event occurred. if an event occurred more than once on the same date, record the event multiple times with the same date. if an event occurred more than once in the target timeframe but on different dates, record the event multiple times but with unique dates. any occurrence between start of procedure and until next procedure or discharge"
                 }
+        ],
+        "ncdResources": [
+                {
+                        "title": "Qualitative/Quantitative Crosswalk",
+                        "type": "NCDR Resources",
+                        "isImage": true,
+                        "crosswalkData": [
+                                {"term": "No stenosis/disease noted", "value": "<50%", "group": "lt50"},
+                                {"term": "Normal", "value": "<50%", "group": "lt50"},
+                                {"term": "No significant disease", "value": "<50%", "group": "lt50"},
+                                {"term": "Patent vessel", "value": "<50%", "group": "lt50"},
+                                {"term": "Luminal irregularities", "value": "<50%", "group": "lt50"},
+                                {"term": "Minimal disease", "value": "<50%", "group": "lt50"},
+                                {"term": "Diffuse disease", "value": "<50%", "group": "lt50"},
+                                {"term": "Mild disease", "value": "<50%", "group": "lt50"},
+                                {"term": "Borderline obstructive/obstruction", "value": "\u226550%", "group": "gte50"},
+                                {"term": "Borderline disease", "value": "\u226550%", "group": "gte50"},
+                                {"term": "Moderate disease", "value": "\u226550%", "group": "gte50"},
+                                {"term": "Intermediate disease", "value": "\u226550%", "group": "gte50"},
+                                {"term": "Significant", "value": "\u226570%", "group": "gte70"},
+                                {"term": "Obstructive disease", "value": "\u226570%", "group": "gte70"},
+                                {"term": "Flow-limiting", "value": "\u226570%", "group": "gte70"},
+                                {"term": "Critical", "value": "\u226590%", "group": "gte90"},
+                                {"term": "Subtotaled", "value": "\u226590%", "group": "gte90"},
+                                {"term": "Severe", "value": "\u226590%", "group": "gte90"},
+                                {"term": "Tight", "value": "\u226590%", "group": "gte90"},
+                                {"term": "Occlusive", "value": "\u226590%", "group": "gte90"},
+                                {"term": "Total occlusion", "value": "100%", "group": "100"},
+                                {"term": "Chronic Total Occlusion (CTO)", "value": "100%", "group": "100"},
+                                {"term": "Occluded", "value": "100%", "group": "100"}
+                        ],
+                        "searchText": "qualitative quantitative crosswalk stenosis disease noted normal no significant disease patent vessel luminal irregularities minimal disease diffuse disease mild disease borderline obstructive obstruction borderline disease moderate disease intermediate disease significant obstructive disease flow-limiting critical subtotaled severe tight occlusive total occlusion chronic total occlusion cto occluded ncdr resources"
+                }
         ]
 };
 
@@ -5428,7 +5523,14 @@
                     results.push(item);
                 }
             });
-            
+
+            // Search NCDR resources
+            allData.ncdResources.forEach(item => {
+                if (matchesFilter(item.type) && item.searchText.includes(searchTerm)) {
+                    results.push(item);
+                }
+            });
+
             // Sort by sequence number
             results.sort((a, b) => {
                 const seqA = parseInt(a.seqNum) || 0;
@@ -5449,6 +5551,8 @@
                     return 'type-acd';
                 case 'Pending Definition Updates':
                     return 'type-pending';
+                case 'NCDR Resources':
+                    return 'type-ncdr-resources';
                 default:
                     return 'type-dictionary';
             }
@@ -5535,15 +5639,40 @@
                         </div>
                     ` : ''}
                 `;
+            } else if (item.type === 'NCDR Resources') {
+                if (item.isImage && item.crosswalkData) {
+                    const rows = item.crosswalkData.map(row =>
+                        `<tr class="crosswalk-group-${row.group}"><td>${highlightText(row.term, currentSearchTerm)}</td><td>${row.value}</td></tr>`
+                    ).join('');
+                    contentHTML = `
+                        <div class="result-section">
+                            <table class="crosswalk-table">
+                                <thead>
+                                    <tr>
+                                        <th>Qualitative Description</th>
+                                        <th>Stenosis %</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    ${rows}
+                                </tbody>
+                            </table>
+                        </div>
+                    `;
+                }
             }
-            
+
+            const titleDisplay = item.title || item.elementName;
+            const headerHTML = item.seqNum
+                ? `<span class="seq-badge">SEQ# ${item.seqNum}</span><span class="type-badge ${badgeClass}">${item.type}</span>`
+                : `<span class="type-badge ${badgeClass}">${item.type}</span>`;
+
             return `
                 <div class="result-item">
                     <div class="result-header">
-                        <span class="seq-badge">SEQ# ${item.seqNum}</span>
-                        <span class="type-badge ${badgeClass}">${item.type}</span>
+                        ${headerHTML}
                     </div>
-                    <div class="element-name">${highlightText(item.elementName, currentSearchTerm)}</div>
+                    <div class="element-name">${highlightText(titleDisplay, currentSearchTerm)}</div>
                     <div class="result-content">
                         ${contentHTML}
                     </div>
