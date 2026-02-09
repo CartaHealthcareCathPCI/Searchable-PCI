@@ -5606,23 +5606,167 @@
         let allData = null;
         let currentFilter = 'all';
         let currentSearchTerm = '';
+        let currentExpandedTerms = [];
 
         // Load data
         function loadData() {
             allData = embeddedData;
         }
 
+        // Medication synonym groups: brand names, generic names, and common abbreviations
+        // Each sub-array contains all equivalent names for the same medication
+        const medicationSynonyms = [
+            // Calcium Channel Blockers
+            ["cardizem", "diltiazem"],
+            ["calan", "isoptin", "verapamil"],
+            ["norvasc", "amlodipine"],
+            ["procardia", "adalat", "nifedipine"],
+            // Statins
+            ["lipitor", "atorvastatin"],
+            ["zocor", "simvastatin"],
+            ["crestor", "rosuvastatin"],
+            ["pravachol", "pravastatin"],
+            ["livalo", "pitavastatin"],
+            ["lescol", "fluvastatin"],
+            // Antiplatelet Agents
+            ["plavix", "clopidogrel"],
+            ["effient", "prasugrel"],
+            ["brilinta", "ticagrelor"],
+            ["kengreal", "cangrelor"],
+            ["aspirin", "asa", "acetylsalicylic acid"],
+            // Anticoagulants
+            ["coumadin", "jantoven", "warfarin"],
+            ["lovenox", "enoxaparin"],
+            ["arixtra", "fondaparinux"],
+            ["angiomax", "bivalirudin"],
+            ["eliquis", "apixaban"],
+            ["xarelto", "rivaroxaban"],
+            ["pradaxa", "dabigatran"],
+            ["savaysa", "edoxaban"],
+            // GP IIb/IIIa Inhibitors
+            ["integrilin", "eptifibatide"],
+            ["reopro", "abciximab"],
+            ["aggrastat", "tirofiban"],
+            // Beta Blockers
+            ["lopressor", "toprol", "metoprolol"],
+            ["coreg", "carvedilol"],
+            ["tenormin", "atenolol"],
+            ["zebeta", "bisoprolol"],
+            ["bystolic", "nebivolol"],
+            ["inderal", "propranolol"],
+            ["betapace", "sotylize", "sotalol"],
+            // ACE Inhibitors
+            ["vasotec", "enalapril"],
+            ["altace", "ramipril"],
+            ["zestril", "prinivil", "lisinopril"],
+            ["lotensin", "benazepril"],
+            ["accupril", "quinapril"],
+            ["capoten", "captopril"],
+            // ARBs
+            ["diovan", "valsartan"],
+            ["cozaar", "losartan"],
+            ["atacand", "candesartan"],
+            ["benicar", "olmesartan"],
+            ["micardis", "telmisartan"],
+            ["avapro", "irbesartan"],
+            // ARNI
+            ["entresto", "sacubitril/valsartan"],
+            // Thrombolytics
+            ["activase", "alteplase", "tpa"],
+            ["retavase", "reteplase"],
+            ["tnkase", "tenecteplase"],
+            // Vasodilators / Nitrates
+            ["nitrostat", "nitroglycerin", "ntg"],
+            ["imdur", "isosorbide mononitrate"],
+            ["isordil", "isosorbide dinitrate"],
+            // Antiarrhythmics
+            ["cordarone", "pacerone", "amiodarone"],
+            ["multaq", "dronedarone"],
+            ["tambocor", "flecainide"],
+            ["rhythmol", "propafenone"],
+            ["norpace", "disopyramide"],
+            ["tikosyn", "dofetilide"],
+            // Diuretics
+            ["lasix", "furosemide"],
+            ["bumex", "bumetanide"],
+            ["demadex", "torsemide"],
+            ["hydrochlorothiazide", "hctz", "microzide"],
+            ["aldactone", "spironolactone"],
+            ["inspra", "eplerenone"],
+            // Vasopressors / Inotropes
+            ["levophed", "norepinephrine"],
+            ["neosynephrine", "phenylephrine"],
+            ["dobutrex", "dobutamine"],
+            ["intropin", "dopamine"],
+            // Other Cardiac Medications
+            ["lanoxin", "digoxin"],
+            ["adenocard", "adenosine"],
+            ["natrecor", "nesiritide"],
+            ["cleviprex", "clevidipine"],
+            ["nipride", "nitroprusside"]
+        ];
+
+        // Build a fast lookup: each lowercase name -> its full synonym group
+        const synonymLookup = {};
+        medicationSynonyms.forEach(group => {
+            const lowerGroup = group.map(n => n.toLowerCase());
+            lowerGroup.forEach(name => {
+                synonymLookup[name] = lowerGroup;
+            });
+        });
+
+        // Escape special regex characters in a string
+        function escapeRegex(str) {
+            return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+        }
+
+        // Given a search term, return an array of expanded search terms including medication synonyms
+        function getExpandedSearchTerms(searchTerm) {
+            searchTerm = searchTerm.toLowerCase().trim();
+            if (!searchTerm) return [searchTerm];
+
+            const terms = new Set([searchTerm]);
+
+            // Check if the entire search term is a known medication name
+            if (synonymLookup[searchTerm]) {
+                synonymLookup[searchTerm].forEach(syn => terms.add(syn));
+                return Array.from(terms);
+            }
+
+            // Check if any individual word in the search matches a medication name
+            const words = searchTerm.split(/\s+/);
+            words.forEach(word => {
+                if (synonymLookup[word]) {
+                    synonymLookup[word].forEach(syn => {
+                        terms.add(searchTerm.replace(word, syn));
+                    });
+                }
+            });
+
+            return Array.from(terms);
+        }
+
         function highlightText(text, searchTerm) {
             if (!searchTerm || !text) return text;
-            
-            const terms = searchTerm.toLowerCase().split(/\s+/).filter(t => t.length > 2);
+
+            // Collect all terms to highlight: original words + synonym words
+            const allTerms = new Set();
+            const originalTerms = searchTerm.toLowerCase().split(/\s+/).filter(t => t.length > 2);
+            originalTerms.forEach(t => allTerms.add(t));
+
+            // Add words from expanded synonym terms
+            if (currentExpandedTerms && currentExpandedTerms.length > 1) {
+                currentExpandedTerms.forEach(expandedTerm => {
+                    expandedTerm.split(/\s+/).filter(t => t.length > 2).forEach(t => allTerms.add(t));
+                });
+            }
+
             let highlighted = text;
-            
-            terms.forEach(term => {
-                const regex = new RegExp(`(${term})`, 'gi');
+            allTerms.forEach(term => {
+                const regex = new RegExp(`(${escapeRegex(term)})`, 'gi');
                 highlighted = highlighted.replace(regex, '<mark>$1</mark>');
             });
-            
+
             return highlighted;
         }
 
@@ -5651,48 +5795,60 @@
 
         function searchData(searchTerm) {
             if (!allData) return [];
-            
+
             searchTerm = searchTerm.toLowerCase().trim();
-            if (!searchTerm) return [];
-            
+            if (!searchTerm) {
+                currentExpandedTerms = [];
+                return [];
+            }
+
+            // Expand search term with medication synonyms
+            const expandedTerms = getExpandedSearchTerms(searchTerm);
+            currentExpandedTerms = expandedTerms;
+
             const results = [];
-            
+
             // Helper function to check if item matches filter
             function matchesFilter(type) {
                 return currentFilter === 'all' || type === currentFilter;
             }
-            
+
+            // Helper function to check if item matches any of the expanded search terms
+            function matchesSearch(item) {
+                return expandedTerms.some(term => item.searchText.includes(term));
+            }
+
             // Search main definitions
             allData.mainDefinitions.forEach(item => {
-                if (matchesFilter(item.type) && item.searchText.includes(searchTerm)) {
+                if (matchesFilter(item.type) && matchesSearch(item)) {
                     results.push(item);
                 }
             });
-            
+
             // Search supporting definitions
             allData.supportingDefinitions.forEach(item => {
-                if (matchesFilter(item.type) && item.searchText.includes(searchTerm)) {
+                if (matchesFilter(item.type) && matchesSearch(item)) {
                     results.push(item);
                 }
             });
-            
+
             // Search additional coding directives
             allData.additionalCodingDirectives.forEach(item => {
-                if (matchesFilter(item.type) && item.searchText.includes(searchTerm)) {
+                if (matchesFilter(item.type) && matchesSearch(item)) {
                     results.push(item);
                 }
             });
-            
+
             // Search pending updates
             allData.pendingUpdates.forEach(item => {
-                if (matchesFilter(item.type) && item.searchText.includes(searchTerm)) {
+                if (matchesFilter(item.type) && matchesSearch(item)) {
                     results.push(item);
                 }
             });
 
             // Search NCDR resources
             allData.ncdResources.forEach(item => {
-                if (matchesFilter(item.type) && item.searchText.includes(searchTerm)) {
+                if (matchesFilter(item.type) && matchesSearch(item)) {
                     results.push(item);
                 }
             });
@@ -5703,7 +5859,7 @@
                 const seqB = parseInt(b.seqNum) || 0;
                 return seqA - seqB;
             });
-            
+
             return results;
         }
 
@@ -5899,7 +6055,17 @@
             
             resultsInfo.style.display = 'block';
             const filterText = currentFilter === 'all' ? 'all sources' : currentFilter;
-            resultsInfo.textContent = `Found ${results.length} result${results.length !== 1 ? 's' : ''} in ${filterText}`;
+            let infoText = `Found ${results.length} result${results.length !== 1 ? 's' : ''} in ${filterText}`;
+
+            // Show synonym info when medication name expansion is active
+            if (currentExpandedTerms.length > 1) {
+                const searchLower = currentSearchTerm.toLowerCase().trim();
+                const synonymTerms = currentExpandedTerms.filter(t => t !== searchLower);
+                if (synonymTerms.length > 0) {
+                    infoText += ` (also searching for: ${synonymTerms.join(', ')})`;
+                }
+            }
+            resultsInfo.textContent = infoText;
             
             resultsContainer.innerHTML = results.map(renderResult).join('');
         }
