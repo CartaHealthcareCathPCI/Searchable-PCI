@@ -282,6 +282,115 @@
         .crosswalk-group-100 { background-color: #efebe9; }
         .crosswalk-group-100 td:last-child { color: #4e342e; }
 
+        /* Coronary Artery Segment Diagram styles */
+        .segment-legend {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 12px;
+            padding: 12px 16px;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+
+        .segment-legend-item {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--carta-gray-dark);
+        }
+
+        .segment-legend-swatch {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            border-radius: 3px;
+            border: 1px solid rgba(0,0,0,0.1);
+        }
+
+        .segment-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 8px;
+            font-size: 14px;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .segment-table thead th {
+            padding: 12px 16px;
+            text-align: left;
+            font-weight: 700;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            background: var(--carta-teal-dark);
+            color: #ffffff;
+        }
+
+        .segment-table thead th:first-child {
+            width: 100px;
+            text-align: center;
+        }
+
+        .segment-table thead th:last-child {
+            width: 130px;
+            text-align: center;
+        }
+
+        .segment-table tbody td {
+            padding: 8px 16px;
+            border-bottom: 1px solid #e8eef2;
+        }
+
+        .segment-table tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        .segment-num-cell {
+            font-weight: 700;
+            text-align: center;
+            color: var(--carta-gray-dark);
+        }
+
+        .segment-abbrev-cell {
+            font-weight: 600;
+            text-align: center;
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+        }
+
+        .segment-group-lm { background-color: #ffebee; }
+        .segment-group-lm .segment-abbrev-cell { color: #E53935; }
+
+        .segment-group-proxlad { background-color: #fce4ec; }
+        .segment-group-proxlad .segment-abbrev-cell { color: #AD1457; }
+
+        .segment-group-middistlad { background-color: #fffde7; }
+        .segment-group-middistlad .segment-abbrev-cell { color: #9e8600; }
+
+        .segment-group-ramus { background-color: #e8f5e9; }
+        .segment-group-ramus .segment-abbrev-cell { color: #2e7d32; }
+
+        .segment-group-rca { background-color: #e3f2fd; }
+        .segment-group-rca .segment-abbrev-cell { color: #1565C0; }
+
+        .segment-group-circ { background-color: #e8eaf6; }
+        .segment-group-circ .segment-abbrev-cell { color: #1565C0; }
+
+        .segment-group-pda { background-color: #e0f2f1; }
+        .segment-group-pda .segment-abbrev-cell { color: #00695C; }
+
+        .segment-source {
+            margin-top: 12px;
+            font-size: 12px;
+            color: #999;
+            font-style: italic;
+        }
+
         .element-name {
             font-size: 18px;
             font-weight: 600;
@@ -5433,6 +5542,63 @@
                                 {"term": "Occluded", "value": "100%", "group": "100"}
                         ],
                         "searchText": "qualitative quantitative crosswalk stenosis disease noted normal no significant disease patent vessel luminal irregularities minimal disease diffuse disease mild disease borderline obstructive obstruction borderline disease moderate disease intermediate disease significant obstructive disease flow-limiting critical subtotaled severe tight occlusive total occlusion chronic total occlusion cto occluded ncdr resources"
+                },
+                {
+                        "title": "Coronary Artery Segment Diagram",
+                        "type": "NCDR Resources",
+                        "isImage": true,
+                        "segmentDiagram": true,
+                        "legendGroups": [
+                                {"label": "Left Main", "color": "#E53935"},
+                                {"label": "Proximal LAD", "color": "#CE93D8"},
+                                {"label": "Mid-Distal LAD", "color": "#FDD835"},
+                                {"label": "Ramus", "color": "#4CAF50"},
+                                {"label": "RCA", "color": "#64B5F6"},
+                                {"label": "Circumflex", "color": "#1565C0"},
+                                {"label": "PDA (dominance dependent)", "color": "#00695C"}
+                        ],
+                        "segmentData": [
+                                {"num": "1", "name": "Proximal right coronary artery conduit segment", "abbrev": "pRCA", "group": "rca"},
+                                {"num": "2", "name": "Mid-right coronary artery conduit segment", "abbrev": "mRCA", "group": "rca"},
+                                {"num": "3", "name": "Distal right coronary artery conduit segment", "abbrev": "dRCA", "group": "rca"},
+                                {"num": "4", "name": "Right posterior descending artery segment", "abbrev": "rPDA", "group": "pda"},
+                                {"num": "5", "name": "Right posterior atrioventricular segment", "abbrev": "rPAV", "group": "rca"},
+                                {"num": "6", "name": "First right posterolateral segment", "abbrev": "1st RPL", "group": "rca"},
+                                {"num": "7", "name": "Second right posterolateral segment", "abbrev": "2nd RPL", "group": "rca"},
+                                {"num": "8", "name": "Third right posterolateral segment", "abbrev": "3rd RPL", "group": "rca"},
+                                {"num": "9", "name": "Posterior descending septal perforators segment", "abbrev": "pDSP", "group": "pda"},
+                                {"num": "10", "name": "Acute marginal segment(s)", "abbrev": "aMarg", "group": "rca"},
+                                {"num": "11a", "name": "Proximal left main coronary artery segment", "abbrev": "pLM", "group": "lm"},
+                                {"num": "11b", "name": "Mid left main coronary artery segment", "abbrev": "mLM", "group": "lm"},
+                                {"num": "11c", "name": "Distal left main coronary artery segment", "abbrev": "dLM", "group": "lm"},
+                                {"num": "12", "name": "Proximal LAD artery segment", "abbrev": "pLAD", "group": "proxlad"},
+                                {"num": "13", "name": "Mid-LAD artery segment", "abbrev": "mLAD", "group": "middistlad"},
+                                {"num": "14", "name": "Distal LAD artery segment", "abbrev": "dLAD", "group": "middistlad"},
+                                {"num": "15", "name": "First diagonal branch segment", "abbrev": "1st Diag", "group": "middistlad"},
+                                {"num": "15a", "name": "Lateral first diagonal branch segment", "abbrev": "Lat 1st Diag", "group": "middistlad"},
+                                {"num": "16", "name": "Second diagonal branch segment", "abbrev": "2nd Diag", "group": "middistlad"},
+                                {"num": "16a", "name": "Lateral second diagonal branch segment", "abbrev": "Lat 2nd Diag", "group": "middistlad"},
+                                {"num": "17", "name": "LAD septal perforator segments", "abbrev": "LAD SP", "group": "middistlad"},
+                                {"num": "18", "name": "Proximal circumflex artery segment", "abbrev": "pCIRC", "group": "circ"},
+                                {"num": "19", "name": "Mid-circumflex artery segment", "abbrev": "mCIRC", "group": "circ"},
+                                {"num": "19a", "name": "Distal circumflex artery segment", "abbrev": "dCIRC", "group": "circ"},
+                                {"num": "20", "name": "First obtuse marginal branch segment", "abbrev": "1st OM", "group": "circ"},
+                                {"num": "20a", "name": "Lateral first obtuse marginal branch segment", "abbrev": "Lat 1st OM", "group": "circ"},
+                                {"num": "21", "name": "Second obtuse marginal branch segment", "abbrev": "2nd OM", "group": "circ"},
+                                {"num": "21a", "name": "Lateral second obtuse marginal branch segment", "abbrev": "Lat 2nd OM", "group": "circ"},
+                                {"num": "22", "name": "Third obtuse marginal branch segment", "abbrev": "3rd OM", "group": "circ"},
+                                {"num": "22a", "name": "Lateral third obtuse marginal branch segment", "abbrev": "Lat 3rd OM", "group": "circ"},
+                                {"num": "23", "name": "Circumflex artery AV groove continuation segment", "abbrev": "CIRC AV", "group": "circ"},
+                                {"num": "24", "name": "First left posterolateral branch segment", "abbrev": "1st LPL", "group": "pda"},
+                                {"num": "25", "name": "Second left posterolateral branch segment", "abbrev": "2nd LPL", "group": "pda"},
+                                {"num": "26", "name": "Third posterolateral descending artery segment", "abbrev": "3rd PL", "group": "pda"},
+                                {"num": "27", "name": "Left posterior descending artery segment", "abbrev": "lPDA", "group": "pda"},
+                                {"num": "28", "name": "Ramus intermedius segment", "abbrev": "Ramus", "group": "ramus"},
+                                {"num": "28a", "name": "Lateral ramus intermedius segment", "abbrev": "Lat Ramus", "group": "ramus"},
+                                {"num": "29", "name": "Third diagonal branch segment", "abbrev": "3rd Diag", "group": "middistlad"},
+                                {"num": "29a", "name": "Lateral third diagonal branch segment", "abbrev": "Lat 3rd Diag", "group": "middistlad"}
+                        ],
+                        "searchText": "coronary artery segment diagram prca mrca drca rpda rpav 1st rpl 2nd rpl 3rd rpl pdsp amarg plm mlm dlm plad mlad dlad 1st diag lat 1st diag 2nd diag lat 2nd diag lad sp pcirc mcirc dcirc 1st om lat 1st om 2nd om lat 2nd om 3rd om lat 3rd om circ av 1st lpl 2nd lpl 3rd pl lpda ramus lat ramus 3rd diag lat 3rd diag proximal right coronary artery conduit mid-right distal right posterior descending atrioventricular posterolateral septal perforators acute marginal left main lad diagonal circumflex obtuse marginal av groove continuation ramus intermedius lateral ncdr resources segment numbers left main proximal lad mid-distal lad rca pda dominance dependent"
                 }
         ]
 };
@@ -5657,6 +5823,31 @@
                                     ${rows}
                                 </tbody>
                             </table>
+                        </div>
+                    `;
+                } else if (item.isImage && item.segmentDiagram) {
+                    const legendHTML = item.legendGroups.map(g =>
+                        `<span class="segment-legend-item"><span class="segment-legend-swatch" style="background:${g.color}"></span>${g.label}</span>`
+                    ).join('');
+                    const rows = item.segmentData.map(row =>
+                        `<tr class="segment-group-${row.group}"><td class="segment-num-cell">${highlightText(row.num, currentSearchTerm)}</td><td>${highlightText(row.name, currentSearchTerm)}</td><td class="segment-abbrev-cell">${highlightText(row.abbrev, currentSearchTerm)}</td></tr>`
+                    ).join('');
+                    contentHTML = `
+                        <div class="result-section">
+                            <div class="segment-legend">${legendHTML}</div>
+                            <table class="segment-table">
+                                <thead>
+                                    <tr>
+                                        <th>Segment #</th>
+                                        <th>Segment Name</th>
+                                        <th>Abbreviation</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    ${rows}
+                                </tbody>
+                            </table>
+                            <div class="segment-source">Source: American College of Cardiology / NCDR. For more information, visit ACC.org/NCDR</div>
                         </div>
                     `;
                 }
