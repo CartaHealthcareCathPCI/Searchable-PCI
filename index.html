@@ -5737,8 +5737,9 @@
             const words = searchTerm.split(/\s+/);
             words.forEach(word => {
                 if (synonymLookup[word]) {
+                    const wordRegex = new RegExp(`\\b${escapeRegex(word)}\\b`, 'g');
                     synonymLookup[word].forEach(syn => {
-                        terms.add(searchTerm.replace(word, syn));
+                        terms.add(searchTerm.replace(wordRegex, syn));
                     });
                 }
             });
@@ -5761,11 +5762,15 @@
                 });
             }
 
-            let highlighted = text;
-            allTerms.forEach(term => {
-                const regex = new RegExp(`(${escapeRegex(term)})`, 'gi');
-                highlighted = highlighted.replace(regex, '<mark>$1</mark>');
-            });
+            if (allTerms.size === 0) return text;
+
+            // Build a single regex matching any of the search terms
+            const pattern = Array.from(allTerms).map(escapeRegex).join('|');
+            // Only highlight inside text content, not inside HTML tags
+            const highlighted = text.replace(
+                new RegExp(`(<[^>]*>)|(${pattern})`, 'gi'),
+                (match, tag, term) => tag ? tag : `<mark>${term}</mark>`
+            );
 
             return highlighted;
         }
