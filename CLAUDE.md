@@ -87,7 +87,7 @@ Note: `matchesFilter(type)` and `matchesSearch(item)` are local helper functions
 The application supports synonym-aware search for two categories:
 
 **Medication synonyms** (`medicationSynonyms` array):
-Groups equivalent brand names, generic names, and abbreviations for cardiac medications (calcium channel blockers, statins, antiplatelet agents, anticoagulants, GP IIb/IIIa inhibitors, beta blockers, ACE inhibitors, ARBs, thrombolytics, nitrates, antiarrhythmics, diuretics, vasopressors, and other cardiac medications).
+Groups equivalent brand names, generic names, and abbreviations for cardiac medications (calcium channel blockers, statins, antiplatelet agents, anticoagulants, GP IIb/IIIa inhibitors, beta blockers, ACE inhibitors, ARBs, ARNIs, thrombolytics, vasodilators/nitrates, antiarrhythmics, diuretics, vasopressors/inotropes, and other cardiac medications).
 
 Examples:
 - `"plavix"` → also searches `"clopidogrel"`
@@ -294,4 +294,4 @@ The `searchData()` function performs substring matching on the `searchText` fiel
 ### Adding a new synonym group
 - For medications: append to the `medicationSynonyms` array
 - For coronary vessels: append to the `coronaryArteryAliases` array (in `site/index.html`)
-- Both are merged into `synonymLookup` at build time — no other changes needed
+- Both are merged into `synonymLookup` at page load — no other changes needed
